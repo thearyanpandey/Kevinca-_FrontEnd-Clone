@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Font1;
+  src: url(./assets/Fonts/KFOlCnqEu92Fr1MmEU9fBBc4.woff2);
+}
+
+@font-face {
+  font-family: Font2;
+  src: url(./assets/Fonts/KFOmCnqEu92Fr1Mu4mxK.woff2);
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* cursor: none; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container{
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.gallery{
+  width: 200vw;
+  height: 200vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1) ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10em;
+}
+
+.row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.row:nth-child(2){
+  justify-content: space-around;
+}
+
+
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item{
+  position: relative;
+  width: 400px;
+  height: 275px;
+  overflow: hidden;
+}
+
+/* Change from .video-wapper to .video-wrapper */
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(2); /* Fixed scale value */
+  transition: 0.3s all;
+}
+
+.video-wapper > div{
+  opacity: 0;
+  transition: 300ms;
+}
+
+.item:hover .video-wapper > div{
+  opacity: 1;
+}
+
+#videoName{
+  position: absolute;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 30px;
+  font-family:"FK Display";
+  color: #fff;
+  opacity: 0;
+  transition: 0.15s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.item:hover #videoName{
+  opacity: 1;
+}
+
+.preview-img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.preview-img img{
+  opacity: 1;
+  transition: 300ms;
+}
+
+.item:hover .preview-img{
+  opacity: 0;
+}
