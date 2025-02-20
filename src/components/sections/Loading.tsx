@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Loading = ({ onLoadingComplete }) => {
+type LoadingProps = {
+  onLoadingComplete: () => void;
+};
+
+const Loading = ( {onLoadingComplete}: LoadingProps) => {
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
