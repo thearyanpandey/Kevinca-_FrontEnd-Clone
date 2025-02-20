@@ -2,11 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import { ProjectImg_Video as videos } from "../Images";
 import ReactPlayer from "react-player";
 
+interface GalleryItem {
+  id: string;
+  rowId: number;
+  video?: typeof videos[number];
+}
+
+
 const Work_Page = () => {
-  const galleryRef = useRef(null);
-  const [items, setItems] = useState([]); // Changed to 2D array
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [items, setItems] = useState<GalleryItem[][]>([]);
+  //const [items, setItems] = useState([]); // Changed to 2D array
 
   useEffect(() => {
+    const container = galleryRef.current;
+    
     const generateItems = () => {
       const rows = [
         { id: 1, count: 4 },
@@ -30,37 +40,46 @@ const Work_Page = () => {
     };
     generateItems();
 
-    const handleMouseMove = (e) => {
-      const {clientX, clientY, currentTarget} = e;
-      const { width, height } = currentTarget.getBoundingClientRect();
+    const handleMouseMove = (e: MouseEvent) => {
+      const {clientX, clientY} = e;
+      
+      if(container){
+        const {width, height, left, top} = container.getBoundingClientRect();
+        const centerX = left + width/2;
+        const centerY = top + height/2;
 
-      const centerX = width/2;
-      const centerY = height/2;
-
-      const sensitivity = 1;
-      const deltaX = (centerX - clientX) / sensitivity;
-      const deltaY = (centerY - clientY) / sensitivity;
-
-      galleryRef.current.style.transform = `translate(calc(-50% + ${deltaX}px), calc(-50% + ${deltaY}px))`;
+        const sensitivity = 1;
+        const deltaX = (centerX - clientX) / sensitivity;
+        const deltaY = (centerY - clientY) / sensitivity;
+        
+        container.style.transform = `translate(calc(-50% + ${deltaX}px), calc(-50% + ${deltaY}px))`;
+      }
       
     }
 
-    const container = document.querySelector(".container");
-      container?.addEventListener("mousemove", handleMouseMove);
-
-      return () =>{
-        container?.addEventListener("mousemove", handleMouseMove);
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+    }
+  
+    return () => {
+      if (container) {
+        container.removeEventListener('mousemove', handleMouseMove);
       }
+    };
+   
+
 
 
   }, []);
 
+  
+
   return (
     <div className="container">
       <div ref={galleryRef} className="gallery">
-        {items.map((row, rowIndex) => (
+        {items.map((row:GalleryItem[], rowIndex) => (
           <div key={`row-${rowIndex}`} className="row">
-            {row.map((item) => (
+            {row.map((item:GalleryItem) => (
               <div key={item.id} className="item">
                 <div className="preview-img">
                   <img 

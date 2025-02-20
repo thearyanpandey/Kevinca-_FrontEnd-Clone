@@ -9,6 +9,7 @@ import InverseCursor from "./components/InverseCursor";
 import { Cursor } from "./components/Cursor";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Work_Page from "./components/sections/Work_Page";
+import WorkPage from "./components/sections/WorkPage";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ const App = () => {
           <main>
            <SlideShow />
            <Sticky />
+           <WorkPage/>
           </main>
           <div className="h-[100vh]">EHEHEHEH</div>
         </div>
