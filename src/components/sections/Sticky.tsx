@@ -6,7 +6,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { useRef } from "react";
-import { Container } from "../Container";
 
 export const Sticky = () => {
   return (

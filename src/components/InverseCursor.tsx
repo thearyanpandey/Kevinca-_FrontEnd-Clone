@@ -16,7 +16,7 @@ const InverseCursor = ({ children, className }: Props) => {
   const [cursorVariant, setCursorVariant] = useState("default");
 
   useEffect(() => {
-    const mouseMove = (e) => {
+    const mouseMove = (e:any) => {
       setMousePosition({
         x: e.clientX,
         y: e.clientY,
@@ -41,7 +41,6 @@ const InverseCursor = ({ children, className }: Props) => {
       x: mousePosition.x - 75,
       y: mousePosition.y - 75,
       backgroundColor: "white",
-      mixBlendMode: "difference",
     },
   };
 
@@ -58,6 +57,7 @@ const InverseCursor = ({ children, className }: Props) => {
         <motion.div
           className="cursor pointer-events-none bg-[#111] h-[32px] w-[32px] rounded-full fixed top-0 left-0 "
           variants={variants}
+          style={{ mixBlendMode: "difference" }} 
           animate={cursorVariant}
         >
         </motion.div>

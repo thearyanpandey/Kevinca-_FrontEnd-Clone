@@ -1,5 +1,4 @@
 import { Container } from "../Container";
-import { Cursor } from "../Cursor";
 
 const Hero = () => {
   return (
